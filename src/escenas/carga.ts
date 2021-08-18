@@ -1,3 +1,5 @@
+import Constantes from "../constantes";
+
 export default class Carga extends Phaser.Scene 
 {
     //Barras de Carga
@@ -6,7 +8,7 @@ export default class Carga extends Phaser.Scene
 
 
     constructor () {
-        super('Carga');
+        super(Constantes.ESCENAS.CARGA);
     }
 
     preload (): void {
@@ -31,17 +33,36 @@ export default class Carga extends Phaser.Scene
         );
 
         //Listener cuando se hayan cargado todos los Assets  
-        this.load.on(
-            'complete',
-            function () {
-                this.scene.start('Menu');
-            },
+        this.load.on('complete', ()=> {
+          const fuenteJSON = this.cache.json.get(Constantes.FUENTES.JSON);
+
+          this.cache.bitmapFont.add(Constantes.FUENTES.BITMAP, Phaser.
+          GameObjects.RetroFont.Parse(this, fuenteJSON));
+
+          //carga menu
+          this.scene.start(Constantes.ESCENAS.MENU);
+
+          },
             this
         );
 
         //Carga los assets del juego
-        //Para pruebas cargar 1000 veces la misma imagen con diferentes keys
-        for (let i=1;i<=1000;i++) this.load.image('logo' + i, 'assets/phaser3-logo.png');        
+        this.load.image('logo', 'assets/phaser3-logo.png');    
+        //Mapas
+        this.load.tilemapTiledJSON(Constantes.MAPAS.NIVEL1.TILEMAPJSON, 'assets/niveles/nivel1.json');
+        this.load.image(Constantes.MAPAS.TILESET, 
+        'assets/niveles/nivelestileset.png');
+        
+        //Fondo
+        this.load.image(Constantes.FONDOS.NIVEL1, 
+        'assets/imagenes/fondos/Brown.png')
+
+        //Fuente
+        this.load.json(Constantes.FUENTES.JSON, 
+        '/assets/fuentes/fuente.json');
+
+        this.load.image(Constantes.FUENTES.IMAGEN, 
+        '/assets/fuentes/imagenFuente.png')
     }
 
     /**
