@@ -1,7 +1,8 @@
 const Constantes = {
     EVENTOS:{
         VIDAS: 'cambiaVidas',
-        PUNTUACION: 'cambiaPuntuacion'
+        PUNTUACION: 'cambiaPuntuacion',
+        RELOJ: 'reloj'
     },
     MENU:{
         JUGAR: 'JUGAR'
@@ -17,7 +18,8 @@ const Constantes = {
     },
     REGISTRO:{
         VIDAS: 'vidas',
-        PUNTUACION: 'puntuacion'
+        PUNTUACION: 'puntuacion',
+        RELOJ: 'reloj'
     },
     MAPAS: {
         NIVEL1:{
@@ -25,7 +27,8 @@ const Constantes = {
             CAPAPLATAFORMAS: 'Plataformas'
         },
         TILESET: 'nivelestileset',
-        POSICIONFINAL: 'posicionfinal'
+        POSICIONFINAL: 'posicionfinal',
+        ENEMIGOS: 'enemigos'
     },
     FONDOS:{
         NIVEL1: 'Brown'
@@ -45,6 +48,28 @@ const Constantes = {
     },
     OBJETOS:{
         FINAL: 'final'
+    },
+    ENEMIGOS: {
+        BUNNY:{
+            ID: 'bunny',
+            ANIM: 'bunnyCorre',
+            VELOCIDAD: 75
+        },
+        CHICKEN:{
+            ID: 'chicken',
+            ANIM: 'chickenCorre',
+            VELOCIDAD: 100
+        },
+        MUSHROOM:{
+            ID: 'mushroom',
+            ANIM: 'mushroomCorre',
+            VELOCIDAD: 100
+        },
+        RADISH:{
+            ID: 'radish',
+            ANIM: 'radishCorre',
+            VELOCIDAD: 75
+        }
     }
 };
 export default Constantes;

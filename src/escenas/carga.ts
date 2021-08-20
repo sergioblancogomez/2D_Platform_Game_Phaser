@@ -77,6 +77,20 @@ export default class Carga extends Phaser.Scene
         //Trofeo final
         this.load.image(Constantes.OBJETOS.FINAL, 
         'imagenes/objetos/final.png')
+
+        //Enemigos
+        this.load.spritesheet(Constantes.ENEMIGOS.BUNNY.ID, 
+        'imagenes/enemigos/bunny.png', { frameWidth: 34, frameHeight: 44});
+
+        this.load.spritesheet(Constantes.ENEMIGOS.CHICKEN.ID, 
+        'imagenes/enemigos/chicken.png', { frameWidth: 32, frameHeight: 34});
+
+        this.load.spritesheet(Constantes.ENEMIGOS.MUSHROOM.ID, 
+        'imagenes/enemigos/bunny.png', { frameWidth: 32, frameHeight: 32});
+
+        this.load.spritesheet(Constantes.ENEMIGOS.RADISH.ID, 
+        'imagenes/enemigos/bunny.png', { frameWidth: 30, frameHeight: 38});
+
     }
 
     /**
