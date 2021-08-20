@@ -46,23 +46,37 @@ export default class Carga extends Phaser.Scene
             this
         );
 
+        //------------------------------------------------------
+        this.load.path = 'assets/';
+
         //Carga los assets del juego
-        this.load.image('logo', 'assets/phaser3-logo.png');    
+        this.load.image('logo', 'phaser3-logo.png');
+            
         //Mapas
-        this.load.tilemapTiledJSON(Constantes.MAPAS.NIVEL1.TILEMAPJSON, 'assets/niveles/nivel1.json');
+        this.load.tilemapTiledJSON(Constantes.MAPAS.NIVEL1.TILEMAPJSON, 
+        'niveles/nivel1.json');
         this.load.image(Constantes.MAPAS.TILESET, 
-        'assets/niveles/nivelestileset.png');
+        'niveles/nivelestileset.png');
         
         //Fondo
         this.load.image(Constantes.FONDOS.NIVEL1, 
-        'assets/imagenes/fondos/Brown.png')
+        'imagenes/fondos/Brown.png')
 
         //Fuente
         this.load.json(Constantes.FUENTES.JSON, 
-        '/assets/fuentes/fuente.json');
+        'fuentes/fuente.json');
 
         this.load.image(Constantes.FUENTES.IMAGEN, 
-        '/assets/fuentes/imagenFuente.png')
+        'fuentes/imagenFuente.png')
+
+        //Jugador
+        this.load.atlas(Constantes.JUGADOR.ID, 
+        'imagenes/jugador/ninjafrog.png',
+        'imagenes/jugador/ninjafrog.json');
+
+        //Trofeo final
+        this.load.image(Constantes.OBJETOS.FINAL, 
+        'imagenes/objetos/final.png')
     }
 
     /**

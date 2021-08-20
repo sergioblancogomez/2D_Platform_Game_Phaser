@@ -9,7 +9,14 @@ const Configuracion = {
     width: 800,
     height: 600,
     scene: [Carga, Menu, Nivel1, HUD],
-    pixelArt: true
+    pixelArt: true,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y : 600 },
+            debug: true
+        }
+    }
 };
 
 export default Configuracion;
