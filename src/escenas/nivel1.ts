@@ -1,5 +1,6 @@
 import Constantes from '../constantes';
 import Jugador from '../gameobjects/jugador';
+import Enemigos from '../gameobjects/enemigos';
 
 export default class Nivel1 extends Phaser.Scene
 {
@@ -9,7 +10,7 @@ export default class Nivel1 extends Phaser.Scene
     private vidas: number;
     private puntuacion: number;
 
-    private mapaNivel : Phaser.Tilemaps.Tilemap;
+    public mapaNivel : Phaser.Tilemaps.Tilemap;
     private conjuntoPatrones: Phaser.Tilemaps.Tileset;
     private capaMapaNivel : Phaser.Tilemaps.TilemapLayer;
 
@@ -17,7 +18,13 @@ export default class Nivel1 extends Phaser.Scene
 
     private jugador : Jugador;
 
-    
+    //tiempo nivel
+    private segundos: number;
+    private tiempoRestante: number;
+    private tiempoAgotado: boolean;
+
+    //enemigos
+    private bunnyGroup: Enemigos;
 
     constructor ()
     {
@@ -35,6 +42,9 @@ export default class Nivel1 extends Phaser.Scene
         this.registry.set(Constantes.REGISTRO.VIDAS, this.vidas);        
         this.registry.set(Constantes.REGISTRO.PUNTUACION, this.puntuacion);        
 
+        this.segundos = 1;
+        this.tiempoRestante = 10;
+        this.tiempoAgotado = false;
     }
 
 
@@ -45,7 +55,6 @@ export default class Nivel1 extends Phaser.Scene
 
     create ()
     {        
-        const logo = this.add.image(400, 70, 'logo');
         
         const jugarTxt: Phaser.GameObjects.Text = this.add.text(50, this.height/2, 'NIVEL 1', {fontSize:'32px', color:'#FFFFFF'});
 
@@ -134,9 +143,17 @@ export default class Nivel1 extends Phaser.Scene
             this.scene.stop(Constantes.ESCENAS.HUD);
             this.scene.start(Constantes.ESCENAS.MENU);
         });
+
+        //Añade los enemigos obteniendolos de la capa de objetos del mapa
+        this.bunnyGroup = new Enemigos(this, Constantes.MAPAS.ENEMIGOS,
+        Constantes.ENEMIGOS.BUNNY.ID, Constantes.ENEMIGOS.BUNNY.ANIM,
+        Constantes.ENEMIGOS.BUNNY.VELOCIDAD);
+
+        this.physics.add.collider(this.bunnyGroup, this.capaMapaNivel);
+
     }
 
-    update(): void{
+    update(time): void{
         //mover el fondo
         this.imagenFondo.tilePositionY -= 0.8;
 
@@ -145,6 +162,34 @@ export default class Nivel1 extends Phaser.Scene
             this.scene.stop(Constantes.ESCENAS.HUD);
             this.scene.start(Constantes.ESCENAS.MENU);
         }
+
         this.jugador.update();
+
+        //Gestión del tiempo
+        if ((this.segundos != Math.floor(Math.abs(time / 1000))) &&
+        !this.tiempoAgotado){
+            this.segundos = Math.floor(Math.abs(time / 1000));
+            this.tiempoRestante--;
+
+        let minutos: number = Math.floor(this.tiempoRestante / 60);
+        let segundos: number = Math.floor(this.tiempoRestante -
+        (minutos * 60));
+
+        let textoReloj: string = Phaser.Utils.String.Pad(minutos,2,'0',1)+
+        ":"+ Phaser.Utils.String.Pad(segundos,2,'0',1);
+        //Registro
+        this.registry.set(Constantes.REGISTRO.RELOJ, textoReloj);
+        //Envío al HUD
+        this.events.emit(Constantes.EVENTOS.RELOJ);
+
+        //When el tiempo termine GAME OVER
+        if (this.tiempoRestante == 0){
+            this.tiempoAgotado = true;
+            this.scene.stop(Constantes.ESCENAS.NIVEL1);
+            this.scene.stop(Constantes.ESCENAS.HUD);
+            this.scene.start(Constantes.ESCENAS.MENU);
+        }
+        }
+
     }
 }

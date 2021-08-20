@@ -3,6 +3,7 @@ import Constantes from '../constantes';
 export default class HUD extends Phaser.Scene {
     private vidasTxt : Phaser.GameObjects.Text;
     private puntuacionTxt : Phaser.GameObjects.Text;
+    private relojTxt: Phaser.GameObjects.Text;
 
     private width: number;
     private height: number;
@@ -18,15 +19,21 @@ export default class HUD extends Phaser.Scene {
 
     create(): void{
         const nivel1: Phaser.Scene = this.scene.get('Nivel1');
-        nivel1.events.on(Constantes.EVENTOS.VIDAS, this.actualizaVidas, this);
-        nivel1.events.on(Constantes.EVENTOS.PUNTUACION, this.actualizaPuntuacion, this);
+        nivel1.events.on(Constantes.EVENTOS.VIDAS, this.actualizaVidas, 
+        this);
+        nivel1.events.on(Constantes.EVENTOS.PUNTUACION, 
+        this.actualizaPuntuacion, this);
+        nivel1.events.on(Constantes.EVENTOS.RELOJ, this.actualizaReloj, this);
 
-
-
-        this.vidasTxt = this.add.text(20,20, Constantes.HUD.VIDAS + this.registry.get(Constantes.REGISTRO.VIDAS), {fontSize:'32px', color:'#FFFFFF'});
+        this.vidasTxt = this.add.text(20,20, Constantes.HUD.VIDAS +
+        this.registry.get(Constantes.REGISTRO.VIDAS), 
+        {fontSize:'32px', color:'#FFFFFF'});
         
-        this.puntuacionTxt = this.add.text(this.width - 50 ,20, '000', { fontSize: '20px', color: '#FFFFFF' })
+        this.puntuacionTxt = this.add.text(this.width - 50 
+        ,20, '000', { fontSize: '20px', color: '#FFFFFF' })
 
+        this.relojTxt = this.add.text(this.width/2,20,'05:00', { fontSize: '20px', 
+        color: '#FFFFFF'});
 
     }
 
@@ -35,9 +42,12 @@ export default class HUD extends Phaser.Scene {
     }
 
     private actualizaPuntuacion(): void {
-        this.puntuacionTxt.text = Phaser.Utils.String.Pad(this.registry.get("puntuacion"), 3, '0', 1);
+        this.puntuacionTxt.text = Phaser.Utils.String.Pad
+        (this.registry.get("puntuacion"), 3, '0', 1);
     }
 
-
+    private actualizaReloj(): void {
+        this.relojTxt.text = this.registry.get(Constantes.REGISTRO.RELOJ);
+    }
 
 }
