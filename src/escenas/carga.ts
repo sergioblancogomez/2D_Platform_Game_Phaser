@@ -91,6 +91,14 @@ export default class Carga extends Phaser.Scene
         this.load.spritesheet(Constantes.ENEMIGOS.RADISH.ID, 
         'imagenes/enemigos/bunny.png', { frameWidth: 30, frameHeight: 38});
 
+        //Explosion
+        this.load.spritesheet(Constantes.ENEMIGOS.EXPLOSION.ID, 
+        'imagenes/enemigos/explosion.png', { frameWidth: 38, frameHeight: 38});
+
+        //Plataformas Móviles
+        this.load.image(Constantes.OBJETOS.PLATAFORMAMOVIL.ID,
+        'imagenes/objetos/plataformamovil.png');
+
     }
 
     /**

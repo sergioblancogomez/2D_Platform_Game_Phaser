@@ -28,7 +28,10 @@ const Constantes = {
         },
         TILESET: 'nivelestileset',
         POSICIONFINAL: 'posicionfinal',
-        ENEMIGOS: 'enemigos'
+        ENEMIGOS: 'enemigos',
+        PLATAFORMASMOVILES: 'plataformasmoviles',
+        PLATAFORMAVERTICAL: 'vertical',
+        PLATAFORMAHORIZONTAL: 'horizontal'
     },
     FONDOS:{
         NIVEL1: 'Brown'
@@ -47,7 +50,11 @@ const Constantes = {
         }
     },
     OBJETOS:{
-        FINAL: 'final'
+        FINAL: 'final',
+        PLATAFORMAMOVIL:{
+            ID: 'plataformamovil',
+            VELOCIDAD: 60
+        }
     },
     ENEMIGOS: {
         BUNNY:{
@@ -69,6 +76,10 @@ const Constantes = {
             ID: 'radish',
             ANIM: 'radishCorre',
             VELOCIDAD: 75
+        }, 
+        EXPLOSION: {
+            ID: 'explosion',
+            ANIM: 'explota'
         }
     }
 };
