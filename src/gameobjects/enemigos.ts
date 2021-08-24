@@ -5,7 +5,7 @@ export default class Enemigos extends Phaser.Physics.Arcade.Group {
     private velocidad: number;
 
     constructor(escena: Nivel1, nombreObjeto:string, idObjeto:string,
-        animObjeto: string, velocidad: number){
+        animObjeto: string, velocidad: number, rect:any){
             super(escena.physics.world, escena);
 
             this.escena = escena;
@@ -29,8 +29,8 @@ export default class Enemigos extends Phaser.Physics.Arcade.Group {
 
             this.children.entries.map((enemigo: any) => {
                 enemigo.body.setCollideWorldBounds(true);
-                enemigo.body.setSize(30,30);
-                enemigo.body.setOffset(0,10);
+                enemigo.body.setSize(rect.size.x,rect.size.y);
+                enemigo.body.setOffset(rect.offset.x,rect.offset.y);
                 enemigo.play(animObjeto);
                 this.mueveEnemigo((Phaser.Math.Between(0,1) ? 'izda' :
                 'dcha'), enemigo);
